@@ -105,11 +105,20 @@ reduzirPorLista xss = [xs `removerPossibilidades` unicos | xs <- xss]
     -- Obtém os elementos únicos em uma lista de possibilidades
     unicos = concat (filter unicoElemento xss)
 
--- Busca a solução para o tabuleiro Kojun
+-- Realiza uma busca para encontrar soluções válidas do tabuleiro Kojun
+-- Gera recursivamente tabuleiros candidatos ao resultado, aplicando restrições a cada passo
+-- Retorna uma lista de todos os tabuleiros que satisfazem as regras do jogo
 buscarSolucaoKojun :: Tabuleiro Possibilidades -> TabuleiroKojun -> [TabuleiroKojun]
 buscarSolucaoKojun valores regioes
-  | naoTemSolucao valores regioes = []
-  | all (all unicoElemento) valores = [map concat valores]
+  | naoTemSolucao valores regioes = [] --Se não há solução possível, retorna uma lista vazia
+  -- Caso de sucesso: Se todas as células têm um único valor possível,
+  -- retorna a solução atual como uma lista contendo um único tabuleiro
+  | all (all unicoElemento) valores = [map concat valores] 
+    -- Continua a busca
+    -- 1. Expande as escolhas para uma célula não determinada
+    -- 2. Reduz as possibilidades com base nas novas escolhas
+    -- 3. Recursivamente busca soluções para o novo estado do tabuleiro
+    -- 4. Concatena todas as soluções encontradas
   | otherwise = [sol | valores' <- expandirPossibilidades valores, sol <- buscarSolucaoKojun (reduzirPossibilidadesKojun valores' regioes) regioes]
 
 -- Verifica se não há solução para o tabuleiro Kojun
