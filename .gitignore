@@ -1,0 +1,7 @@
+*.beam
+*.hi
+*.o
+*.exe
+*.out
+kojun-haskell/[!.]*
+
