@@ -188,6 +188,7 @@ testar_possibilidades(Matriz, Regiao, {X, Y}, [Possibilidade | Resto]) ->
   NovasPossVazios = gerar_possibilidades_para_vazios(NovaMatriz, Regiao, NovasCoordsVazias, []),
   TamanhoNovasPoss = length(NovasPossVazios),
   TamanhoPoss = length(PossVazios),
+    % Se o número de células com possibilidades diminui em mais de uma ao ser preenchido, significa que o valor é incorreto, então chama novamente a função.
   if TamanhoNovasPoss < (TamanhoPoss - 1) ->
        testar_possibilidades(Matriz, Regiao, {X, Y}, Resto);
      true -> resolver_tabuleiro(NovaMatriz, Regiao)
