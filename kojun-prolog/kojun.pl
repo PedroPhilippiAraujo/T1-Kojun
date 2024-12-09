@@ -92,6 +92,4 @@ tabuleiro(1, [ [(01-2), (01-_), (02-_), (02-_), (02-1), (03-_)],
                [(05-_), (05-_), (05-_), (06-_), (07-_), (07-_)],
                [(08-_), (08-_), (10-3), (11-_), (11-4), (11-2)],
                [(09-_), (09-_), (10-_), (10-_), (11-_), (11-_)]]).
-% Verifica se não há repetições na lista de linha/coluna.
-% Se não houver, retorna verdadeiro.
-valores_unicos(_-List) :- all_distinct(List).
+
